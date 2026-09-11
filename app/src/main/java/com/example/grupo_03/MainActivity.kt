@@ -1947,6 +1947,59 @@ fun PantallaReglas(onVolver: () -> Unit) {
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // 7. ¿QUÉ ES MINIMAX?
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = FondoSeccion),
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp, vertical = 26.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    EtiquetaSeccion(texto = "¿QUÉ ES MINIMAX?")
+                    Spacer(modifier = Modifier.height(14.dp))
+                    Text(
+                        text = "Minimax es el algoritmo que usa la computadora para decidir su jugada. Antes de mover, simula todas las jugadas posibles, imagina cómo respondería el oponente a cada una, y elige la opción que le da el mejor resultado garantizado, incluso si el oponente juega también de la mejor manera posible.",
+                        color = TextoSecundario,
+                        fontSize = 13.sp,
+                        textAlign = TextAlign.Justify,
+                        modifier = Modifier.fillMaxWidth(0.9f) // <-- Centra el bloque de texto (90% de ancho), el texto interno sigue justificado
+                    )
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Column(verticalArrangement = Arrangement.spacedBy(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                        ModalidadItem(
+                            nombre = "Jugador que Maximiza",
+                            descripcion = "Representa a la computadora. Entre todas sus jugadas posibles, busca la que le dé el resultado más alto (la mejor utilidad) considerando la respuesta del oponente.",
+                            color = VerdePrincipal
+                        )
+                        ModalidadItem(
+                            nombre = "Jugador que Minimiza",
+                            descripcion = "Representa al oponente. Se asume que, en su turno, siempre elegirá la respuesta que más perjudica a la computadora (la de menor utilidad para ella). De ahí el nombre 'Minimax'.",
+                            color = RojoO
+                        )
+                        ModalidadItem(
+                            nombre = "Función de Utilidad",
+                            descripcion = "Cada tablero posible recibe un puntaje: se cuentan las líneas (filas, columnas o diagonales) que la computadora todavía puede completar, y se restan las que puede completar el oponente. A mayor puntaje, mejor es ese tablero para la IA.",
+                            color = AzulX
+                        )
+                        ModalidadItem(
+                            nombre = "Árbol de Decisiones",
+                            descripcion = "El algoritmo organiza estas posibilidades como un árbol: primero las casillas donde podría jugar la computadora, y debajo de cada una, las respuestas que podría dar el oponente. Este es el mismo árbol que se muestra en el Panel de Análisis.",
+                            color = VerdePrincipal
+                        )
+                        ModalidadItem(
+                            nombre = "Relación con la Dificultad",
+                            descripcion = "En Difícil, la computadora siempre juega el movimiento que Minimax calcula como óptimo. En Medio y Fácil, a veces ignora ese resultado a propósito y juega una casilla al azar, para que la partida sea más accesible.",
+                            color = RojoO
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
