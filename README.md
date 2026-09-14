@@ -67,6 +67,9 @@ en un dispositivo Android:
 
 [Descargar APK](https://github.com/EnriGS16/Proyecto_TresEnRayaApp/releases/download/v1.0/3-Raya.apk)
 
+> La aplicación se distribuye mediante un APK para Android.
+> Es posible que Android solicite autorización para instalar aplicaciones provenientes de fuentes externas.
+
 ## Integrantes — Grupo 03
 
 - Steven Guzman
