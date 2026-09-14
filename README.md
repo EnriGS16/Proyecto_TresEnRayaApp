@@ -56,6 +56,17 @@ app/src/main/java/com/example/grupo_03/
 4. Ejecuta la app (▶) en un emulador o en un dispositivo físico con
    depuración USB habilitada.
 
+## Descargar la aplicación
+
+Escanea el siguiente código QR para descargar directamente la aplicación
+en un dispositivo Android:
+
+![QR para descargar Tres en Raya](assets/QR_TresEnRaya.png)
+
+### Descarga directa
+
+[Descargar APK](https://github.com/EnriGS16/Proyecto_TresEnRayaApp/releases/download/v1.0/3-Raya.apk)
+
 ## Integrantes — Grupo 03
 
 - Steven Guzman
