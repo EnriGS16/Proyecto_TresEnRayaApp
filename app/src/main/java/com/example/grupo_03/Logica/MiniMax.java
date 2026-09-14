@@ -6,6 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Implementación del algoritmo Minimax para la toma de decisiones de la IA.
+ * Construye un árbol de estados posibles, evalúa las utilidades de cada rama
+ * y determina el movimiento que maximice las probabilidades de victoria o
+ * minimice las de derrota.
+ */
+
 public class MiniMax implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -105,9 +112,6 @@ public class MiniMax implements Serializable {
         Tree<Tablero> jugadaElegida = mejoresJugadas.get(posicionAleatoria);
         Tablero estadoElegido = jugadaElegida.getRoot().getContent();
 
-        // NOTA: Ya no marcamos la jugada como elegida aquí.
-        // Eso ahora lo hace la clase Partida usando el método marcarJugadaRealmenteElegida()
-
         return obtenerMovimiento(tableroActual, estadoElegido);
     }
 
@@ -126,17 +130,17 @@ public class MiniMax implements Serializable {
         return analisisUltimaJugada;
     }
 
-    // --- NUEVO MÉTODO --
-    // Nos permite marcar como "Elegida" la jugada que la IA realmente colocó en el tablero,
-    // sea por decisión óptima (Minimax) o por aleatoriedad (Dificultad fácil/media)
+    /**
+     * Identifica y marca en el análisis la jugada que la IA ejecutó de manera definitiva,
+     * útil para distinguir entre decisiones basadas en el cálculo óptimo y movimientos aleatorios
+     * introducidos por la dificultad.
+     */
     public void marcarJugadaRealmenteElegida(int fila, int columna, char simbolo) {
 
-        // Primero nos aseguramos de que ninguna jugada esté marcada
         for (AnalisisJugada analisis : analisisUltimaJugada) {
             analisis.setElegida(false);
         }
 
-        // Luego buscamos cuál de los tableros analizados coincide con la jugada que hizo la IA
         for (AnalisisJugada analisis : analisisUltimaJugada) {
             if (analisis.getTablero().obtenerCasilla(fila, columna) == simbolo) {
                 analisis.setElegida(true);

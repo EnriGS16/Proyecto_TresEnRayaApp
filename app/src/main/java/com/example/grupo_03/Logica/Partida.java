@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-/*
-Partida implementa Serializable para que Jetpack Compose pueda guardarla
-directamente con rememberSaveable (y asi sobreviva a una rotacion de
-pantalla o a que Android mate el proceso en segundo plano). Para que esto
-funcione, TODOS los objetos que Partida guarda como campos (Tablero,
-MiniMax, HistorialJugada, AnalisisJugada, AnalisisRespuesta) tambien deben
-ser Serializable; Dificultad ya lo es porque es un enum, y Random y
-LinkedList/ArrayList ya son Serializable por si solos.
-*/
+/**
+ * Controlador principal que gestiona el estado y flujo de una partida de Tres en Raya.
+ * Administra el tablero, los turnos, las dificultades y la lógica según el modo de juego
+ * (Humano vs Humano, Humano vs IA, IA vs IA).
+ *
+ * Implementa Serializable para preservar la integridad del estado en Android a través de
+ * Jetpack Compose ante eventos del ciclo de vida (ej. cambios en la orientación de pantalla).
+ */
+
 public class Partida implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,6 @@ public class Partida implements Serializable {
 
     private boolean modoHumanoVsHumano = false;
 
-    // Constructor: Humano vs Computadora
     public Partida(char simboloHumano, char simboloComputadora, boolean iniciaHumano){
         this(simboloHumano, simboloComputadora, iniciaHumano, Dificultad.DIFICIL);
     }
@@ -57,7 +56,6 @@ public class Partida implements Serializable {
         }
     }
 
-    // Constructor: Computadora vs Computadora
     public Partida(char simboloJugador1, char simboloJugador2, char simboloQueInicia, Dificultad dificultadJugador1, Dificultad dificultadJugador2){
         this.tablero = new Tablero();
         this.minimax = new MiniMax();
@@ -77,7 +75,6 @@ public class Partida implements Serializable {
         this.turnoActual = simboloQueInicia;
     }
 
-    // Constructor: Humano vs Humano (ACTUALIZADO para recibir el símbolo inicial)
     public Partida(boolean modoHumanoVsHumano, char simboloQueInicia) {
         this.tablero = new Tablero();
         this.minimax = new MiniMax();
@@ -150,7 +147,6 @@ public class Partida implements Serializable {
         return true;
     }
 
-    // Método de juego: Humano vs Humano (ACTUALIZADO para generar el análisis)
     public boolean jugarTurnoHumanoVsHumano(int fila, int columna) {
         if (!modoHumanoVsHumano) {
             return false;
@@ -162,15 +158,12 @@ public class Partida implements Serializable {
         char simboloEnTurno = turnoActual;
         char simboloRival = (simboloEnTurno == 'X') ? 'O' : 'X';
 
-        // 1. Generamos el análisis simulado de las opciones antes de mover
         minimax.obtenerMejorMovimiento(tablero, simboloEnTurno, simboloRival);
 
-        // 2. Colocamos el símbolo en el tablero
         if (!tablero.colocarSimbolo(fila, columna, simboloEnTurno)) {
             return false;
         }
 
-        // 3. Marcamos la jugada que el humano REALMENTE hizo
         minimax.marcarJugadaRealmenteElegida(fila, columna, simboloEnTurno);
 
         historial.add(new HistorialJugada(simboloEnTurno, fila, columna, tablero));
@@ -331,10 +324,6 @@ public class Partida implements Serializable {
 
     public ArrayList<AnalisisJugada> getAnalisisUltimaJugada() {
         if (modoComputadoraVsComputadora) {
-            // Usamos el historial (quien jugó de verdad la última ficha) en vez
-            // de turnoActual: turnoActual NO cambia cuando esa última jugada
-            // termina la partida (victoria o empate), asi que basarnos en el
-            // turno fallaba justo en ese caso y mostraba el analisis del jugador equivocado.
             if (historial.isEmpty()) {
                 return new ArrayList<>();
             }

@@ -4,6 +4,13 @@ import com.example.grupo_03.Modelo.Tablero;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+/**
+ * Almacena el análisis y la proyección de una jugada evaluada por la IA.
+ * Incluye la utilidad mínima garantizada de la jugada y un registro de las
+ * posibles respuestas que el oponente podría realizar.
+ */
+
 public class AnalisisJugada implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -11,17 +18,12 @@ public class AnalisisJugada implements Serializable {
     private int utilidadMinima;
     private boolean elegida;
 
-    /*Guardaremos todas las posibles respuestas
-    que podria realizar el humano
-     */
     private ArrayList<AnalisisRespuesta> respuestas;
 
     public AnalisisJugada(Tablero tablero, int utilidadMinima, boolean elegida) {
-
         this.tablero = tablero;
         this.utilidadMinima = utilidadMinima;
         this.elegida = elegida;
-        //inicializamos la lista para que no sea null
         this.respuestas = new ArrayList<>();
     }
 
@@ -36,15 +38,15 @@ public class AnalisisJugada implements Serializable {
     public boolean isElegida() {
         return elegida;
     }
+
     public void setElegida(boolean elegida) {
         this.elegida = elegida;
     }
-    // Agg una posible respuesta que encontro el minimax.
+
     public void addRespuesta(AnalisisRespuesta respuesta){
         respuestas.add(respuesta);
     }
 
-    //Obtener todas las R. que se analizaron en esta jugada
     public ArrayList<AnalisisRespuesta> getRespuestas(){
         return respuestas;
     }

@@ -1,5 +1,11 @@
 package com.example.grupo_03.Estructuras;
 
+/**
+ * Estructura de datos de árbol n-ario.
+ * Sirve como contenedor para la raíz de los posibles estados del juego
+ * evaluados por el algoritmo Minimax.
+ */
+
 public class Tree<E> {
 
     private NodeTree<E> root;

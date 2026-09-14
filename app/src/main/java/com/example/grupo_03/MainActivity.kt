@@ -79,6 +79,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.window.DialogProperties
 
+
 // ============================================================================
 // SECCIÓN 1: COLORES Y CONSTANTES GLOBALES
 // Paleta de colores y valores fijos que usa toda la app.
@@ -145,10 +146,6 @@ private val BordeSutil: Color get() = if (modoOscuro) Color(0xFF3A3B3F) else Col
 private val CasillaResaltada: Color get() = if (modoOscuro) Color(0xFF315E3B) else Color(0xFFBFE8CC)
 
 
-
-// Representa la modalidad de juego actualmente seleccionada en el menu desplegable
-
-
 // ============================================================================
 // SECCIÓN 2: ENUMS GLOBALES
 // Modalidad de juego y velocidad de simulación, usados en varias pantallas.
@@ -191,7 +188,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AplicacionTresEnRaya() {
 
-    // rememberSaveable en vez de remember: asi la partida en curso (y con
+    // rememberSaveable: asi la partida en curso (y con
     // que modo/dificultad se inicio) sobrevive tanto a una rotacion de
     // pantalla como a que Android mate el proceso en segundo plano.
     // Para que esto funcione, Partida (y todo lo que guarda adentro:
@@ -766,7 +763,6 @@ fun PantallaJuego(partida: Partida, dificultad: Dificultad, onNuevaPartida: () -
         )
     }
 
-    // Usamos los componentes nuevos (adiós al montón de código de diálogos)
     DialogoHistorial(mostrar = mostrarHistorial, historial = partida.getHistorial(), onDismiss = { mostrarHistorial = false })
     DialogoAnalisis(mostrar = mostrarAnalisis, partida = partida, onDismiss = { mostrarAnalisis = false })
 }
@@ -1316,10 +1312,6 @@ fun MiniTablero(tablero: Tablero) {
 
 @Composable
 fun PantallaEstadisticas(onVolver: () -> Unit) {
-    // Cambiar este contador fuerza a Compose a releer los valores de
-    // 'stats' (son campos normales de Java, no mutableStateOf, asi que
-    // Compose no se entera solo con que cambien; key(refrescar) obliga
-    // a recomponer todo lo que está adentro cuando incrementamos esto).
     var refrescar by remember { mutableStateOf(0) }
     var mostrarConfirmacionReinicio by remember { mutableStateOf(false) }
 
@@ -1635,24 +1627,24 @@ fun PantallaDesarrolladores(onVolver: () -> Unit) {
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     Box(modifier = Modifier.weight(1f)) {
-                        TarjetaDesarrollador(nombre = "Steven Guzman", rol = "Desarrollador Android", colorAvatar = AzulX, correo = "steven.guzman@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 99 999 9999", slogan = "El código limpio siempre gana", ciudad = "Guayaquil", fotoResId = R.drawable.foto_steven)
+                        TarjetaDesarrollador(nombre = "Steven Guzman", rol = "Desarrollador Android", colorAvatar = AzulX, correo = "stguzman@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0978936743", ciudad = "Guayaquil", fotoResId = R.drawable.foto_steven)
                     }
                     Box(modifier = Modifier.weight(1f)) {
-                        TarjetaDesarrollador(nombre = "Carlos Garcia", rol = "Diseño de interfaz", colorAvatar = RojoO, correo = "carlos.garcia@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 98 888 8888", slogan = "El detalle hace la diferencia", ciudad = "Guayaquil", fotoResId = R.drawable.foto_carlos)
+                        TarjetaDesarrollador(nombre = "Carlos Garcia", rol = "Diseño de interfaz", colorAvatar = RojoO, correo = "cargarci@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0963735381", ciudad = "Guayaquil", fotoResId = R.drawable.foto_carlos)
                     }
                     Box(modifier = Modifier.weight(1f)) {
-                        TarjetaDesarrollador(nombre = "David Jalon", rol = "Lógica del juego", colorAvatar = VerdePrincipal, correo = "david.jalon@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 97 777 7777", slogan = "Cada algoritmo cuenta una historia", ciudad = "Guayaquil", fotoResId = R.drawable.foto_david)
+                        TarjetaDesarrollador(nombre = "David Jalon", rol = "Lógica del juego", colorAvatar = VerdePrincipal, correo = "dejalon@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0984252637", ciudad = "Guayaquil", fotoResId = R.drawable.foto_david)
                     }
                 }
                 Spacer(modifier = Modifier.height(24.dp))
             } else {
                 // DISEÑO VERTICAL: Original
                 Spacer(modifier = Modifier.height(32.dp))
-                TarjetaDesarrollador(nombre = "Steven Guzman", rol = "Desarrollador Android", colorAvatar = AzulX, correo = "steven.guzman@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 99 999 9999", slogan = "El código limpio siempre gana", ciudad = "Guayaquil", fotoResId = R.drawable.foto_steven)
+                TarjetaDesarrollador(nombre = "Steven Guzman", rol = "Desarrollador Android", colorAvatar = AzulX, correo = "stguzman@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0978936743", ciudad = "Guayaquil", fotoResId = R.drawable.foto_steven)
                 Spacer(modifier = Modifier.height(16.dp))
-                TarjetaDesarrollador(nombre = "Carlos Garcia", rol = "Diseño de interfaz", colorAvatar = RojoO, correo = "carlos.garcia@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 98 888 8888", slogan = "El detalle hace la diferencia", ciudad = "Guayaquil", fotoResId = R.drawable.foto_carlos)
+                TarjetaDesarrollador(nombre = "Carlos Garcia", rol = "Diseño de interfaz", colorAvatar = RojoO, correo = "cargarci@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0963735381", ciudad = "Guayaquil", fotoResId = R.drawable.foto_carlos)
                 Spacer(modifier = Modifier.height(16.dp))
-                TarjetaDesarrollador(nombre = "David Jalon", rol = "Lógica del juego", colorAvatar = VerdePrincipal, correo = "david.jalon@ejemplo.com", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 97 777 7777", slogan = "Cada algoritmo cuenta una historia", ciudad = "Guayaquil", fotoResId = R.drawable.foto_david)
+                TarjetaDesarrollador(nombre = "David Jalon", rol = "Lógica del juego", colorAvatar = VerdePrincipal, correo = "dejalon@espol.edu.ec", universidad = "Escuela Superior Politécnica del Litoral (ESPOL)", carrera = "Ingeniería en Computación", telefono = "+593 0984252637", ciudad = "Guayaquil", fotoResId = R.drawable.foto_david)
                 Spacer(modifier = Modifier.height(28.dp))
             }
 
@@ -1662,7 +1654,7 @@ fun PantallaDesarrolladores(onVolver: () -> Unit) {
 }
 
 @Composable
-fun TarjetaDesarrollador(nombre: String, rol: String, colorAvatar: Color, correo: String, universidad: String, carrera: String, telefono: String, slogan: String, ciudad: String, fotoResId: Int? = null) {
+fun TarjetaDesarrollador(nombre: String, rol: String, colorAvatar: Color, correo: String, universidad: String, carrera: String, telefono: String, ciudad: String, fotoResId: Int? = null) {
     var mostrarPerfil by remember { mutableStateOf(false) }
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
@@ -1690,12 +1682,12 @@ fun TarjetaDesarrollador(nombre: String, rol: String, colorAvatar: Color, correo
         }
     }
     if (mostrarPerfil) {
-        DialogoPerfilDesarrollador(nombre = nombre, rol = rol, colorAvatar = colorAvatar, correo = correo, universidad = universidad, carrera = carrera, telefono = telefono, slogan = slogan, ciudad = ciudad, fotoResId = fotoResId, onCerrar = { mostrarPerfil = false })
+        DialogoPerfilDesarrollador(nombre = nombre, rol = rol, colorAvatar = colorAvatar, correo = correo, universidad = universidad, carrera = carrera, telefono = telefono, ciudad = ciudad, fotoResId = fotoResId, onCerrar = { mostrarPerfil = false })
     }
 }
 
 @Composable
-fun DialogoPerfilDesarrollador(nombre: String, rol: String, colorAvatar: Color, correo: String, universidad: String, carrera: String, telefono: String, slogan: String, ciudad: String, fotoResId: Int?, onCerrar: () -> Unit) {
+fun DialogoPerfilDesarrollador(nombre: String, rol: String, colorAvatar: Color, correo: String, universidad: String, carrera: String, telefono: String, ciudad: String, fotoResId: Int?, onCerrar: () -> Unit) {
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val maxDialogHeight = LocalConfiguration.current.screenHeightDp.dp * if (isLandscape) 0.95f else 0.85f
 
@@ -1727,7 +1719,6 @@ fun DialogoPerfilDesarrollador(nombre: String, rol: String, colorAvatar: Color, 
                 if (fotoResId != null) { Image(painter = painterResource(id = fotoResId), contentDescription = "Foto de $nombre", contentScale = ContentScale.Crop, modifier = Modifier.size(96.dp).clip(CircleShape).border(2.dp, colorAvatar, CircleShape)) }
                 else { AvatarIniciales(nombre = nombre, color = colorAvatar, tamano = 96.dp) }
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "\u201C$slogan\u201D", color = TextoSecundario, fontSize = 13.sp, fontStyle = androidx.compose.ui.text.font.FontStyle.Italic, textAlign = TextAlign.Center, modifier = Modifier.padding(horizontal = 8.dp))
                 Spacer(modifier = Modifier.height(22.dp))
                 Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     FilaDatoPerfil(etiqueta = "Correo", valor = correo, colorAcento = colorAvatar)
@@ -2017,7 +2008,7 @@ fun ModalidadItem(nombre: String, descripcion: String, color: Color) {
             color = TextoSecundario,
             fontSize = 13.sp,
             textAlign = TextAlign.Justify,
-            modifier = Modifier.fillMaxWidth() // <-- Ocupa todo el ancho, alineada a la izquierda junto con la píldora de arriba
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
@@ -2025,8 +2016,8 @@ fun ModalidadItem(nombre: String, descripcion: String, color: Color) {
 @Composable
 fun ConsejoItem(texto: String, color: Color) {
     Row(
-        modifier = Modifier.fillMaxWidth(1f), // <-- La fila entera ocupa el 90% para alinearse con los demás textos
-        verticalAlignment = Alignment.Top // Alinea el punto arriba en relación al texto
+        modifier = Modifier.fillMaxWidth(1f),
+        verticalAlignment = Alignment.Top
     ) {
         // Punto indicador al lado izquierdo
         Box(modifier = Modifier.padding(top = 6.dp).size(6.dp).background(color = color, shape = RoundedCornerShape(50)))
@@ -2036,7 +2027,7 @@ fun ConsejoItem(texto: String, color: Color) {
             color = TextoSecundario,
             fontSize = 13.sp,
             textAlign = TextAlign.Justify,
-            modifier = Modifier.weight(1f) // <-- Ocupa todo el resto del espacio en el bloque del 90%
+            modifier = Modifier.weight(1f)
         )
     }
 }

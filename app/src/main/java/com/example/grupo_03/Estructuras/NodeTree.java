@@ -2,6 +2,11 @@ package com.example.grupo_03.Estructuras;
 
 import java.util.LinkedList;
 
+/**
+ * Representa un nodo genérico para una estructura de árbol n-ario.
+ * Utilizado para almacenar los estados individuales del tablero dentro del árbol de decisiones.
+ */
+
 public class NodeTree<E> {
 
     private E content;

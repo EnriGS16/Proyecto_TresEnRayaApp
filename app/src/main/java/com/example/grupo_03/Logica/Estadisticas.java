@@ -3,6 +3,12 @@ package com.example.grupo_03.Logica;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * Patrón Singleton encargado de registrar y persistir las estadísticas globales y detalladas
+ * de todas las partidas jugadas (victorias, derrotas, empates por modos de juego).
+ * Utiliza SharedPreferences para garantizar que los datos sobrevivan al cierre de la aplicación.
+ */
+
 public class Estadisticas {
 
     private static Estadisticas instancia;
@@ -13,7 +19,6 @@ public class Estadisticas {
     public int victoriasGlobalesO = 0;
     public int empatesGlobales = 0;
 
-    // --- NUEVAS VARIABLES PARA IA VS IA ---
     public int cvcVictoriasFacil = 0;
     public int cvcVictoriasMedio = 0;
     public int cvcVictoriasDificil = 0;
@@ -173,7 +178,6 @@ public class Estadisticas {
         guardarDatosLocales();
     }
 
-    // --- AHORA RECIBE LAS DIFICULTADES DE AMBAS IA --
     public void registrarCvC(char ganador, boolean esEmpate, Dificultad difX, Dificultad difO) {
         registrarVictoriaGlobal(ganador, esEmpate);
         cvc.jugadas++;
@@ -200,9 +204,10 @@ public class Estadisticas {
         }
     }
 
-    // Borra permanentemente todas las estadísticas guardadas (tanto en
-    // memoria como en SharedPreferences) y las deja en cero. Útil para
-    // pruebas, o si el usuario quiere empezar a contar desde cero.
+    /**
+     * Limpia permanentemente todas las estadísticas almacenadas, reseteando
+     * los contadores en memoria y en las SharedPreferences.
+     */
     public void reiniciar() {
         totalPartidas = 0;
         victoriasGlobalesX = 0;
